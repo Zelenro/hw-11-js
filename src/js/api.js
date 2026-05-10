@@ -4,10 +4,7 @@ import Notiflix from 'notiflix';
 const API_KEY = '38321296-6f22805a434f6b10647c0454a';
 const URL = `https://pixabay.com/api/`;
 
-let page = 1;
-
-async function searchImage(query, page) {
-  // let totalHits = 0;
+async function getImage(query, pageNumber) {
   const options = {
     params: {
       key: API_KEY,
@@ -15,19 +12,19 @@ async function searchImage(query, page) {
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
-      per_page: 40,
-      page: page,
+      per_page: 20,
+      page: pageNumber,
     },
   };
+  try {
+    const response = await axios(URL, options);
 
-  const response = await axios(URL, options);
-  console.log(response.data.totalHits);
-  if (response.data.totalHits) {
-    Notiflix.Notify.info(`Hooray! We found ${response.data.totalHits} images.`);
+    const { totalHits, hits } = response.data;
+    return { totalHits, hits };
+  } catch (error) {
+    console.log(error);
+    Notiflix.Notify.failure('Something went wrong. Please try again later.');
   }
-
-  // totalHits = response.data.totalHits;
-  return response.data;
 }
 
-export default searchImage;
+export default getImage;

@@ -1,4 +1,4 @@
-function markupResult(data) {
+function renderGallery(data) {
   return data
     .map(
       ({
@@ -35,4 +35,4 @@ function markupResult(data) {
     .join('');
 }
 
-export default markupResult;
+export default renderGallery;

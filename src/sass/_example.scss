@@ -145,3 +145,16 @@ h1 {
     transform: scale(0.95);
   }
 }
+
+
+.load-more {
+  // display: none;
+  display: block;
+  // background-color: #3f51b5;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hidden {
+  display: none;
+}
